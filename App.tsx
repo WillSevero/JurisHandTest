@@ -9,6 +9,8 @@ import { Background } from './src/components/Background';
 import { Routes } from './src/routes';
 import DatabaseInit from './src/database/database-init';
 
+//inicio da aplicação
+
 export default function App() {
     const [fontsLoaded] = useFonts({
         Inter_400Regular,
