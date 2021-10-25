@@ -9,6 +9,9 @@ import { Background } from './src/components/Background';
 import { Routes } from './src/routes';
 import DatabaseInit from './src/database/database-init';
 
+import store from './src/store/store';
+import { Provider } from 'react-redux';
+
 export default function App() {
     const [fontsLoaded] = useFonts({
         Inter_400Regular,
@@ -23,39 +26,15 @@ export default function App() {
     if (!fontsLoaded || !db) return <AppLoading />
 
     return (
-        <Background>
-            <StatusBar
-                barStyle="light-content"
-                backgroundColor="transparent"
-                translucent
-            />
-            <Routes />
-        </Background>
+        <Provider store={store}>
+            <Background>
+                <StatusBar
+                    barStyle="light-content"
+                    backgroundColor="transparent"
+                    translucent
+                />
+                <Routes />
+            </Background>
+        </Provider>
     );
 }
-
-
-
-
-
-// import { StatusBar } from 'expo-status-bar';
-// import React from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.tsx to start working on your app YOLOOOOOO!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

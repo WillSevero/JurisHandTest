@@ -6,7 +6,8 @@ import { ButtonIcon } from '../../components/ButtonIcon';
 
 import { styles } from './styles';
 import { useNavigation } from '@react-navigation/core';
-import AssinaturasService from '../../services/assinatura.service';
+// import AssinaturasService from '../../services/assinatura.service';
+import store from '../../store/store'
 
 export function SignIn() {
     const [btnActive, setbtnActive] = useState(true);
@@ -19,15 +20,21 @@ export function SignIn() {
     }
 
     const findAllAssinatura = () => {
-        AssinaturasService.findAll()
-            .then((response: any) => {
-                console.log('test');
-                if (response.length > 0) {
-                    setbtnActive(false)
-                }
-            }), (error) => {
-                console.log(error);
-            }
+        const state = store.getState();
+        console.log(state);
+
+        if (state.signId !== '') {
+            setbtnActive(false)
+        }
+
+        // AssinaturasService.findAll()
+        //     .then((response: any) => {
+        //         if (response.length > 0) {
+        //             setbtnActive(false)
+        //         }
+        //     }), (error) => {
+        //         console.log(error);
+        //     }
     }
 
     useEffect(() => {

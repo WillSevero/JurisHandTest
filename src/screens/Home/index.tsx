@@ -8,8 +8,14 @@ import { ButtonSign } from '../../components/ButtonSign';
 import { useNavigation } from '@react-navigation/native';
 import { Assinatura } from '../../models/assinatura.model';
 import AssinaturasService from '../../services/assinatura.service';
+import 'react-native-get-random-values';
+import { v4 as uuid } from 'uuid'
+
+import { signApp } from '../../store/storeAcoes';
+import { useDispatch, useSelector } from 'react-redux';
 
 export function Home() {
+  const dispatch = useDispatch();
 
   const navigation = useNavigation();
 
@@ -22,7 +28,9 @@ export function Home() {
 
     let file: Assinatura = new Assinatura()
 
+    file.code = uuid()
     const insertId = AssinaturasService.addData(file);
+    dispatch(signApp(file.code));
     if (insertId == null || insertId == undefined) {
       alert("Não foi possivel inserir nova assinatura")
     } else {
